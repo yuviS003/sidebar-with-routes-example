@@ -59,6 +59,8 @@ function App() {
           <Toolbar />
           <Box sx={{ overflow: 'auto' }}>
             <List>
+              <div className="sticky top-0 p-4 uppercase text-center font-bold text-lg">admin console</div>
+              <Divider />
               <Link to='/'>
                 <div className="nav-links">Home</div>
               </Link>
@@ -82,6 +84,7 @@ function App() {
           <Toolbar />
           <Routes>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
             <Route exact path="/about" element={<About />} />
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/services" element={<Services />} />
