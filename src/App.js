@@ -19,19 +19,32 @@ import Home from './components/Home'
 import About from './components/About'
 import Contact from './components/Contact'
 import Services from './components/Services'
+import Login from './components/Login';
 
 const drawerWidth = 240;
 
 
 function App() {
+
+
+
   return (
     <Router>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <AppBar position="fixed"
+          sx={{
+            zIndex: (theme) => theme.zIndex.drawer + 1,
+            background: "#2d2d30",
+          }}        >
           <Toolbar>
             <Typography variant="h6" noWrap component="div">
-              Clipped drawer
+              <img
+                // src={finactLogo}
+                src="	https://www.treleva.org/api/testWebsite/assets/img/backgrounds/fintech-logo.png"
+                alt="Finact - Admin Console"
+                className="w-[12rem]"
+              />
             </Typography>
           </Toolbar>
         </AppBar>
@@ -73,7 +86,6 @@ function App() {
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/services" element={<Services />} />
           </Routes>
-
         </Box>
       </Box>
     </Router>
