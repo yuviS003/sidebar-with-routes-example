@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -8,10 +8,15 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { Link, Outlet } from 'react-router-dom';
+import LoginContext from '../context/Login/LoginContext';
 
 const drawerWidth = 240;
 
 export default function AdminConsole() {
+    const userDetails = useContext(LoginContext).userData
+    console.log(userDetails)
+    const [roles, setRoles] = useState(userDetails.data.role)
+    console.log(roles);
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -44,19 +49,30 @@ export default function AdminConsole() {
                     <List>
                         <div className="sticky top-0 p-4 uppercase text-center font-bold text-lg">admin console</div>
                         <Divider />
-                        <Divider />
-                        <Link to='/adminConsole/about'>
+                        {/* <Link to='/adminConsole/About'>
                             <div className="nav-links">About</div>
                         </Link>
                         <Divider />
-                        <Link to='/adminConsole/contact'>
+                        <Link to='/adminConsole/Contact'>
                             <div className="nav-links">Contact</div>
                         </Link>
                         <Divider />
-                        <Link to='/adminConsole/services'>
+                        <Link to='/adminConsole/Services'>
                             <div className="nav-links">Services</div>
                         </Link>
-                        <Divider />
+                        <Divider /> */}
+                        {
+                            roles.map((role, index) => {
+                                return (
+                                    <div key={index}>
+                                        <Link to={`/adminConsole/${role}`}>
+                                            <div className="nav-links">{role}</div>
+                                        </Link>
+                                        <Divider />
+                                    </div>
+                                )
+                            })
+                        }
                     </List>
                 </Box>
             </Drawer>

@@ -1,46 +1,49 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import AppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
+import React, { useContext, useState } from 'react';
 import './App.css'
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
-  Link
 } from "react-router-dom";
+import { About, Contact, Services, PrivateRoute, AdminConsoleLander, FallbackRoute } from './components'
 
-import About from './components/About'
-import Contact from './components/Contact'
-import Services from './components/Services'
 import Login from './pages/Login';
 import AdminConsole from './pages/AdminConsole';
-
+import LoginState from './context/Login/LoginState'
 
 
 function App() {
-
-
+  // const userDetails = useContext(loginContext).userData
+  // const [roles, setRoles] = useState(userDetails.data.role)
+  const [roles, setRoles] = useState(['About', 'Contact'])
 
   return (
+    <LoginState>
+      <Routes>
+        {/* public route */}
+        <Route path="/" exact element={<Login />} />
 
-    <>
-      <Router>
-        <Routes>
-          <Route index path="/" element={<Login />} />
-          <Route path="/adminConsole" element={<AdminConsole />}>
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="services" element={<Services />} />
-          </Route>
-        </Routes>
-      </Router>
-    </>
+        {/* protected routes */}
+        <Route path="/adminconsole" element={<AdminConsole />}>
+          <Route index element={<AdminConsoleLander />} />
+          <Route path="About" element={<PrivateRoute requiredRole='About'><About /></PrivateRoute>} />
+          <Route path="Contact" element={<PrivateRoute requiredRole='Contact'><Contact /></PrivateRoute>} />
+          <Route path="Services" element={<PrivateRoute requiredRole='Services'><Services /></PrivateRoute>} />
+          {/* {handlePrivateRoutes(['About', 'Contact', 'Services'])} */}
+          {/* {
+            roles.map((Role, i) => {
+              return (
+                <Route path={`${Role}`} element={<PrivateRoute requiredRole={`${Role}`}>{<Role/>}</PrivateRoute>} />
+              )
+            })
+          } */}
+        </Route>
+
+        {/* fallback route */}
+        <Route path="*" element={<FallbackRoute />} />
+
+      </Routes>
+    </LoginState>
+
   );
 }
 
