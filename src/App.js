@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import AdminConsole from './pages/AdminConsole';
 import LoginState from './context/Login/LoginState'
 import PrivateRoute from './components/PrivateRoute'
+import Test from './components/Test';
 
 function handleComponent(params) {
   switch (params) {
@@ -19,6 +20,8 @@ function handleComponent(params) {
       return <Services />
     case 'Contact':
       return <Contact />
+    case 'Test':
+      return <Test />
 
     default:
       return <FallbackRoute />
@@ -27,7 +30,7 @@ function handleComponent(params) {
 function App() {
   // const userDetails = useContext(loginContext).userData
   // const [roles, setRoles] = useState(userDetails.data.role)
-  const [roles, setRoles] = useState(['About', 'Contact'])
+  const [roles, setRoles] = useState(['About', 'Contact', 'Test'])
 
   return (
     <LoginState>

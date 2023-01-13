@@ -19,7 +19,8 @@ const LoginState = (props) => {
                 role: [
                     "About",
                     "Contact",
-                    "Services"
+                    "Services",
+                    "Test"
                 ]
             }
         })
