@@ -33,9 +33,10 @@ function App() {
               <Route
                 path={`${Role}`}
                 element={
-                  <PrivateRoute requiredRole={`${Role}`}>
-                    <Component />
-                  </PrivateRoute>
+                  // Don't think that PrivateRoute component is even required since we are simple not gonna render the routes for which we don't have a Role
+                  // <PrivateRoute requiredRole={`${Role}`}>
+                  <Component />
+                  // </PrivateRoute>
                 }
               />
             );
@@ -43,6 +44,7 @@ function App() {
         </Route>
 
         {/* fallback route */}
+        {/* This would act as unauthorized/not found component as accessing routes that are not rendered will redirect to this component */}
         <Route path="*" element={<FallbackRoute />} />
       </Routes>
     </LoginState>
